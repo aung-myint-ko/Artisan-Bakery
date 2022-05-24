@@ -1,6 +1,3 @@
-# Artisan-Bakery
-Artisan Bakery (single web page)
-
 
 # Artisan Bakery
 
