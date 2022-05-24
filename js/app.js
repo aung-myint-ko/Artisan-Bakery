@@ -181,45 +181,6 @@ const donutBtn = document.querySelector(".food_type .donuts");
 const hamburger = document.querySelector(".hamburger");
 const loading = document.querySelector(".loading");
 
-new Glider(document.querySelector(".swipper"), {
-  slidesToScroll: 1,
-  slidesToShow: 3,
-  draggable: true,
-  arrows: {
-    prev: "#glider-prev",
-    next: "#glider-next",
-  },
-  responsive: [
-    {
-      // screens greater than >= 1000px
-      breakpoint: 1000,
-      settings: {
-        slidesToShow: "3",
-        slidesToScroll: "1",
-        duration: 0.25,
-      },
-    },
-    {
-      // screens greater than >= 700px
-      breakpoint: 700,
-      settings: {
-        slidesToShow: "2",
-        slidesToScroll: "2",
-        duration: 0.25,
-      },
-    },
-    {
-      // screens greater than >= 300px
-      breakpoint: 300,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        duration: 0.25,
-      },
-    },
-  ],
-});
-
 //adding page loading
 window.addEventListener("load", () => {
   setTimeout(() => {
@@ -252,12 +213,11 @@ navLi.forEach((nav) => {
 });
 
 //hot selling food_recepie slider(used third party libery)
-
 new Glider(document.querySelector(".glider"), {
   slidesToScroll: 1,
-  slidesToShow: 4,
+  slidesToShow: 3,
   draggable: true,
-
+  dots: ".dots",
   arrows: {
     prev: ".glider-prev",
     next: ".glider-next",
@@ -268,7 +228,7 @@ new Glider(document.querySelector(".glider"), {
       breakpoint: 775,
       settings: {
         slidesToShow: "4",
-        slidesToScroll: "1",
+        // slidesToScroll: "1",
         duration: 0.25,
       },
     },
@@ -380,8 +340,45 @@ window.addEventListener("scroll", function () {
     navigation.classList.remove("boxShawdow");
   }
 });
-
-console.log(437549 - 435538);
+//testimonials card slider
+new Glider(document.querySelector(".swipper"), {
+  slidesToScroll: 1,
+  slidesToShow: 3,
+  draggable: true,
+  arrows: {
+    prev: "#glider-prev",
+    next: "#glider-next",
+  },
+  responsive: [
+    {
+      // screens greater than >= 1000px
+      breakpoint: 1000,
+      settings: {
+        slidesToShow: "3",
+        // slidesToScroll: "1",
+        duration: 0.25,
+      },
+    },
+    {
+      // screens greater than >= 700px
+      breakpoint: 700,
+      settings: {
+        slidesToShow: "2",
+        slidesToScroll: "2",
+        duration: 0.25,
+      },
+    },
+    {
+      // screens greater than >= 300px
+      breakpoint: 300,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        duration: 0.25,
+      },
+    },
+  ],
+});
 
 // $(window).scroll(function () {
 //   if ($(this).scrollTop() > 90) {
