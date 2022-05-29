@@ -185,7 +185,7 @@ const loading = document.querySelector(".loading");
 window.addEventListener("load", () => {
   setTimeout(() => {
     loading.style.display = "none";
-  }, 500);
+  }, 200);
 });
 
 //toggling hamburger_menu

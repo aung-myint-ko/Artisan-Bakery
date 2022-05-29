@@ -11,7 +11,7 @@ html {
   font-family: "Baskervville", serif !important;
 }
 /*default value*/
-/* .loading {
+.loading {
   position: fixed;
   top: 0;
   left: 0;
@@ -21,7 +21,7 @@ html {
   background: url(../images/loading.gif) no-repeat center;
   backdrop-filter: blur(30px);
   background-size: 15%;
-} */
+}
 .default_text h5 {
   font-size: 13px;
   font-weight: bold;
