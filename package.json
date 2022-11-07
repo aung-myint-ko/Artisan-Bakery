@@ -25,6 +25,7 @@
     "react-remove-scroll-bar": "^2.3.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.6",
     "redux-persist": "^6.0.0",
     "sass": "^1.55.0",
     "swiper": "^8.4.2",
