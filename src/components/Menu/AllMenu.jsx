@@ -13,16 +13,28 @@ function AllMenu(props) {
   const { allVarietyRecipes, recipeInfo } = useSelector(
     (state) => state.recipesReducer
   );
-  console.log(recipeInfo);
+  console.log(allVarietyRecipes);
 
   useEffect(() => {
     const handleAll = async () => {
-      const cake = await axios.get("/recipes/show/find?variety=cake");
-      const burger = await axios.get("/recipes/show/find?variety=burger");
-      const bread = await axios.get("/recipes/show/find?variety=bread");
-      const donut = await axios.get("/recipes/show/find?variety=donut");
-      const cookie = await axios.get("/recipes/show/find?variety=cookie");
-      const drink = await axios.get("/recipes/show/find?variety=drink");
+      const cake = await axios.get(
+        "https://artisan-bakery-data.herokuapp.com/api/recipes/show/find?variety=cake"
+      );
+      const burger = await axios.get(
+        "https://artisan-bakery-data.herokuapp.com/api/recipes/show/find?variety=burger"
+      );
+      const bread = await axios.get(
+        "https://artisan-bakery-data.herokuapp.com/api/recipes/show/find?variety=bread"
+      );
+      const donut = await axios.get(
+        "https://artisan-bakery-data.herokuapp.com/api/recipes/show/find?variety=donut"
+      );
+      const cookie = await axios.get(
+        "https://artisan-bakery-data.herokuapp.com/api/recipes/show/find?variety=cookie"
+      );
+      const drink = await axios.get(
+        "https://artisan-bakery-data.herokuapp.com/api/recipes/show/find?variety=drink"
+      );
       dispatch(
         AddingAllVarietyRecipes([
           cake.data,
