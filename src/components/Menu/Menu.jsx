@@ -14,7 +14,9 @@ function Menu(props) {
   useEffect(() => {
     const fetchCakes = async () => {
       const cakes = await axios.get(
-        `/recipes/show/find?variety=${pathname.split("/")[2]}`
+        `https://artisan-bakery-data.herokuapp.com/api/recipes/show/find?variety=${
+          pathname.split("/")[2]
+        }`
       );
       dispatch(AddingCakes(cakes.data));
     };

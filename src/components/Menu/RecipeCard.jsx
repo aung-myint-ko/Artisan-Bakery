@@ -9,7 +9,9 @@ function RecipeCard({ recipeDetails }) {
   const dispatch = useDispatch();
   const { name, imageUrl, slug, variety } = recipeDetails;
   const fetchSpecificRecipe = async () => {
-    const singleRecipe = await axios.get(`/recipes/show/${slug}`);
+    const singleRecipe = await axios.get(
+      `https://artisan-bakery-data.herokuapp.com/api/recipes/show/${slug}`
+    );
     dispatch(AddingRecipeInfo(singleRecipe.data));
   };
   return (

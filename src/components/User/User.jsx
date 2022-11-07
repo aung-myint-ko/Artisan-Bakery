@@ -34,7 +34,9 @@ function User(props) {
   //user logout function
   const handleLogout = async () => {
     dispatch(AuthLoadingStart());
-    const logout = await axios.post(`/auth/logout`);
+    const logout = await axios.post(
+      `https://artisan-bakery-data.herokuapp.com/api/auth/logout`
+    );
     if (logout.status === 200) {
       dispatch(AuthLoadingStop());
       navigate("/");
@@ -81,8 +83,13 @@ function User(props) {
   }, [imageFile]);
   useEffect(() => {
     const postImageToDB = async () => {
-      await axios.put("/auth/customer/image", { imageUrl: image });
-      const userInfo = await axios.get(`/auth/customer/${currentUser._id}`);
+      await axios.put(
+        "https://artisan-bakery-data.herokuapp.com/api/auth/customer/image",
+        { imageUrl: image }
+      );
+      const userInfo = await axios.get(
+        `https://artisan-bakery-data.herokuapp.com/api/auth/customer/${currentUser._id}`
+      );
       dispatch(AddingCurrentUserInfo(userInfo.data));
       sessionStorage.setItem("user", JSON.stringify(userInfo.data));
       setImgLoad(false);

@@ -55,13 +55,16 @@ function Registration(props) {
 
   const OnSubmit = async (data) => {
     setCustomer(data);
-    await axios.put("/auth/customer/history", {
-      date: currentDate,
-      hour: formatAMPM(new Date()),
-      quantity: totalQuantity,
-      amount: finalTotalPrice + 1200,
-      foods: orderLists,
-    });
+    await axios.put(
+      "https://artisan-bakery-data.herokuapp.com/api/auth/customer/history",
+      {
+        date: currentDate,
+        hour: formatAMPM(new Date()),
+        quantity: totalQuantity,
+        amount: finalTotalPrice + 1200,
+        foods: orderLists,
+      }
+    );
   };
 
   return (

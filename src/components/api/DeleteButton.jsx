@@ -13,8 +13,12 @@ function DeleteButton({ name, slug }) {
 
   const handleDelete = async () => {
     setLoading(true);
-    const recipe = await axios.get(`/recipes/show/${slug}`);
-    const deleteProcess = await axios.delete(`/recipes/delete/${slug}`);
+    const recipe = await axios.get(
+      `https://artisan-bakery-data.herokuapp.com/api/recipes/show/${slug}`
+    );
+    const deleteProcess = await axios.delete(
+      `https://artisan-bakery-data.herokuapp.com/api/recipes/delete/${slug}`
+    );
     if (deleteProcess.status === 200) {
       setLoading(false);
       //cleaning old image from firebase storage

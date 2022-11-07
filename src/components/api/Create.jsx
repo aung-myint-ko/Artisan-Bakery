@@ -71,7 +71,10 @@ function Create() {
   const handleSubmit = async () => {
     setLoading(true);
     if (imgPerc === 100) {
-      const res = await axios.post("/recipes/add", recipeDatas);
+      const res = await axios.post(
+        "https://artisan-bakery-data.herokuapp.com/api/recipes/add",
+        recipeDatas
+      );
       if (res.status === 201) {
         setLoading(false);
         toast.success("One recipe has added to DB", { duration: 700 });

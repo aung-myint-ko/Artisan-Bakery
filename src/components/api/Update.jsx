@@ -81,7 +81,10 @@ function Update({ name, variety, desc, imageUrl, price, slug }) {
   //Send all data to DB
   const handleSubmit = async () => {
     setLoading(true);
-    const res = await axios.put(`/recipes/update/${slug}`, recipeDatas);
+    const res = await axios.put(
+      `https://artisan-bakery-data.herokuapp.com/api/recipes/update/${slug}`,
+      recipeDatas
+    );
     if (res.status === 201) {
       setTimeout(() => {
         navigate(`/api/manage`);

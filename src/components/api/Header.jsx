@@ -9,7 +9,9 @@ function Header(props) {
   const currentUser = JSON.parse(jsonUser);
 
   const handleLogout = async () => {
-    await axios.post(`/auth/logout`);
+    await axios.post(
+      `https://artisan-bakery-data.herokuapp.com/api/auth/logout`
+    );
     sessionStorage.removeItem("admin");
     window.location.reload();
   };

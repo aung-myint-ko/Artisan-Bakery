@@ -31,7 +31,10 @@ function LogIn(props) {
   const OnSubmit = async (formData) => {
     try {
       dispatch(LoginStart());
-      const postUser = await axios.post(`/auth/admin/signin`, formData);
+      const postUser = await axios.post(
+        `https://artisan-bakery-data.herokuapp.com/api/auth/admin/signin`,
+        formData
+      );
       sessionStorage.setItem("admin", JSON.stringify(postUser.data));
       postUser.status === 200 && toast.success("Successfully Login");
       dispatch(LoginSuccess(postUser.data));

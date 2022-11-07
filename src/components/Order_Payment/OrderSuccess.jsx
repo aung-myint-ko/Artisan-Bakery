@@ -12,7 +12,9 @@ function OrderSuccess(props) {
 
   const handleClick = async () => {
     dispatch(CleaningCart());
-    const request = await axios.get(`/auth/customer/${currentUser._id}`);
+    const request = await axios.get(
+      `https://artisan-bakery-data.herokuapp.com/api/auth/customer/${currentUser._id}`
+    );
     dispatch(AddingCurrentUserInfo(request.data));
   };
 

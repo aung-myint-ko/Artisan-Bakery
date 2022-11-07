@@ -44,7 +44,10 @@ function UserLogIn(props) {
   const OnSubmit = async (formData) => {
     try {
       dispatch(AuthLoadingStart());
-      const request = await axios.post("/auth/signin", formData);
+      const request = await axios.post(
+        "https://artisan-bakery-data.herokuapp.com/api/auth/signin",
+        formData
+      );
       dispatch(AddingCurrentUserInfo(request.data));
       sessionStorage.setItem("user", JSON.stringify(request.data));
       if ((request.status = 200)) {
