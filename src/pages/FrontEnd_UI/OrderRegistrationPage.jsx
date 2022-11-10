@@ -18,7 +18,12 @@ function OrderRegistrationPage(props) {
       dispatch(PageTransitionStop());
     }, 1000);
   }, []);
-  return <>{pageTransition ? <PageLoading /> : <Registration />}</>;
+  return (
+    <>
+      {pageTransition ? <PageLoading /> : null}
+      <Registration />
+    </>
+  );
 }
 
 export default OrderRegistrationPage;

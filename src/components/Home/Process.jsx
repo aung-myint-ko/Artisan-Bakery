@@ -6,11 +6,14 @@ function Process(props) {
     <>
       <div className="grid gap-y-8">
         <div className=" flex flex-col md:grid md:grid-cols-2 ">
-          <LazyLoadImage
-            className=" w-full h-full"
-            src="/images/process1.jpg"
-            alt=""
-          />
+          <div className=" h-60 md:h-auto">
+            <LazyLoadImage
+              className=" w-full h-full bg-slate-50"
+              src="/images/process1.jpg"
+              alt=""
+            />
+          </div>
+
           <div className=" py-7 px-5 bg-[#9c4c12] text-white flex flex-col justify-center items-center">
             <h1 className=" text-2xl md:text-4xl mb-3 md:mb-4 font-semibold text-center  tracking-wider ">
               Art of mixing with ratio
@@ -31,11 +34,13 @@ function Process(props) {
               and the transmission of disease.
             </p>
           </div>
-          <LazyLoadImage
-            className="w-full h-full"
-            src="/images/process2.jpg"
-            alt=""
-          />
+          <div className=" h-60 md:h-auto">
+            <LazyLoadImage
+              className="w-full h-full bg-slate-50"
+              src="/images/process2.jpg"
+              alt=""
+            />
+          </div>
         </div>
       </div>
       <p className=" py-8 md:py-10 text-sm md:text-base mx-auto w-[90%] max-w-2xl leading-relaxed text-center opacity-95">

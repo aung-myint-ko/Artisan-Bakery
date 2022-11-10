@@ -18,7 +18,12 @@ function CartVocherPage(props) {
     }, 1000);
   }, []);
   useDocumentTitle("Cart");
-  return <>{pageTransition ? <PageLoading /> : <CartVocher />}</>;
+  return (
+    <>
+      {pageTransition ? <PageLoading /> : null}
+      <CartVocher />
+    </>
+  );
 }
 
 export default CartVocherPage;

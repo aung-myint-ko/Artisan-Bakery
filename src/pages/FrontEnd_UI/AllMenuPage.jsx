@@ -26,7 +26,13 @@ function AllMenuPage(props) {
   }, []);
 
   useDocumentTitle("All Menu");
-  return <>{pageTransition ? <PageLoading /> : <AllMenu />}</>;
+  return (
+    <>
+      {pageTransition ? <PageLoading /> : null}
+
+      <AllMenu />
+    </>
+  );
 }
 
 export default AllMenuPage;

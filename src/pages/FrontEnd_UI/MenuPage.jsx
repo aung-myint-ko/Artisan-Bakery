@@ -25,7 +25,12 @@ function MenuPage(props) {
   }, []);
   useDocumentTitle(`Menu`);
 
-  return <>{pageTransition ? <PageLoading /> : <Menu />}</>;
+  return (
+    <>
+      {pageTransition ? <PageLoading /> : null}
+      <Menu />
+    </>
+  );
 }
 
 export default MenuPage;

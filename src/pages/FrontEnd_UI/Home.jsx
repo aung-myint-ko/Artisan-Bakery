@@ -16,7 +16,6 @@ function Home(props) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const { pageTransition } = useSelector((state) => state.loadingReducer);
-  const loggedInUser = sessionStorage.getItem("user");
 
   useDocumentTitle("Home");
 
@@ -25,21 +24,17 @@ function Home(props) {
     dispatch(UpdatingRoute(pathname));
     setTimeout(() => {
       dispatch(PageTransitionStop());
-    }, 1000);
+    }, 3000);
   }, []);
 
   return (
-    <>
-      {pageTransition ? (
-        <PageLoading />
-      ) : (
-        <>
-          <Banner />
-          <BriefIntro />
-          <Process />
-        </>
-      )}
-    </>
+    <div>
+      {pageTransition ? <PageLoading /> : null}
+
+      <Banner />
+      <BriefIntro />
+      <Process />
+    </div>
   );
 }
 

@@ -23,14 +23,9 @@ function UserProfilePage(props) {
 
   return (
     <>
-      {pageTransition ? (
-        <PageLoading />
-      ) : (
-        <>
-          <UserNav />
-          <User />
-        </>
-      )}
+      {pageTransition ? <PageLoading /> : null}
+      <UserNav />
+      <User />
     </>
   );
 }

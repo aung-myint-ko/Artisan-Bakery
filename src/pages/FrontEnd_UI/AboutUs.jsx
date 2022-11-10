@@ -22,7 +22,13 @@ function AboutUs(props) {
     }, 1000);
   }, []);
   useDocumentTitle("About Us");
-  return <>{pageTransition ? <PageLoading /> : <Story />}</>;
+  return (
+    <>
+      {pageTransition ? <PageLoading /> : null}
+
+      <Story />
+    </>
+  );
 }
 
 export default AboutUs;

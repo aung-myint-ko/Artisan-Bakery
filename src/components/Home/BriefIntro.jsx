@@ -22,12 +22,12 @@ function BriefIntro(props) {
       </p>
       <div className=" lg:mx-3 grid grid-cols-1 sm:grid-cols-2 gap-y-8 sm:gap-0 ">
         <LazyLoadImage
-          className=" w-[85%] sm:w-[75%] mx-auto"
+          className=" w-[85%] sm:w-[75%] max-w-md mx-auto"
           src="/images/chef1.png"
           alt=""
         />
         <LazyLoadImage
-          className="w-[85%] sm:w-[77%] mx-auto"
+          className="w-[85%] sm:w-[77%] max-w-md  mx-auto"
           src="/images/food-circle.png"
           alt=""
         />

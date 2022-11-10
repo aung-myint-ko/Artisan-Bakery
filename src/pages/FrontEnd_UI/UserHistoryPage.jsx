@@ -24,14 +24,9 @@ function UserHistoryPage(props) {
 
   return (
     <>
-      {pageTransition ? (
-        <PageLoading />
-      ) : (
-        <>
-          <UserNav />
-          <UserHistory />
-        </>
-      )}
+      {pageTransition ? <PageLoading /> : null}
+      <UserNav />
+      <UserHistory />
     </>
   );
 }

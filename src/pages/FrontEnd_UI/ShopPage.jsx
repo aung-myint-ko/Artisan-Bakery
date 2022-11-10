@@ -24,7 +24,12 @@ function ShopPage(props) {
   }, []);
   useDocumentTitle("Shop");
 
-  return <>{pageTransition ? <PageLoading /> : <Shop />}</>;
+  return (
+    <>
+      {pageTransition ? <PageLoading /> : null}
+      <Shop />
+    </>
+  );
 }
 
 export default ShopPage;
