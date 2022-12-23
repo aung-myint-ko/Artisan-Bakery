@@ -46,7 +46,7 @@ function UserSignUp(props) {
     try {
       dispatch(AuthLoadingStart());
       const request = await axios.post(
-        "https://artisan-bakery-data.herokuapp.com/api/auth/signup",
+        "https://artisan-bakery-data.onrender.com/api/auth/signup",
         formData
       );
       dispatch(AddingCurrentUserInfo(request.data));

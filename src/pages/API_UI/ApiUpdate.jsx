@@ -8,7 +8,9 @@ function ApiUpdate(props) {
   const [recipe, setRecipe] = useState();
   useEffect(() => {
     const getSingleRecipe = async () => {
-      const recipe = await axios.get(`/recipes/show/${slug}`);
+      const recipe = await axios.get(
+        `https://artisan-bakery-data.onrender.com/api/recipes/show/${slug}`
+      );
       setRecipe(recipe.data);
     };
     getSingleRecipe();

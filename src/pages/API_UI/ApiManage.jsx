@@ -11,7 +11,9 @@ function ApiManage(props) {
 
   useEffect(() => {
     const fetchingRecipes = async () => {
-      const recipes = await axios.get(`/recipes/show`);
+      const recipes = await axios.get(
+        `https://artisan-bakery-data.onrender.com/api/recipes/show`
+      );
       dispatch(AddRceipesToArray(recipes.data));
     };
     fetchingRecipes();

@@ -56,7 +56,7 @@ function Registration(props) {
   const OnSubmit = async (data) => {
     setCustomer(data);
     await axios.put(
-      "https://artisan-bakery-data.herokuapp.com/api/auth/customer/history",
+      "https://artisan-bakery-data.onrender.com/api/auth/customer/history",
       {
         date: currentDate,
         hour: formatAMPM(new Date()),

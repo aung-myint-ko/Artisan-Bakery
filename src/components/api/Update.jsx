@@ -82,7 +82,7 @@ function Update({ name, variety, desc, imageUrl, price, slug }) {
   const handleSubmit = async () => {
     setLoading(true);
     const res = await axios.put(
-      `https://artisan-bakery-data.herokuapp.com/api/recipes/update/${slug}`,
+      `https://artisan-bakery-data.onrender.com/api/recipes/update/${slug}`,
       recipeDatas
     );
     if (res.status === 201) {

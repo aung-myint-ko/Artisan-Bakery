@@ -45,7 +45,7 @@ function UserLogIn(props) {
     try {
       dispatch(AuthLoadingStart());
       const request = await axios.post(
-        "https://artisan-bakery-data.herokuapp.com/api/auth/signin",
+        "https://artisan-bakery-data.onrender.com/api/auth/signin",
         formData
       );
       dispatch(AddingCurrentUserInfo(request.data));

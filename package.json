@@ -56,7 +56,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://artisan-bakery-data.herokuapp.com/api",
   "devDependencies": {
     "autoprefixer": "^10.4.9",
     "postcss": "^8.4.16",

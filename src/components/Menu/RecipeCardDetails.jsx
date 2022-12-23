@@ -36,7 +36,7 @@ function RecipeCardDetails(props) {
     dispatch(ResetQuantity());
     const fetchSpecificRecipe = async () => {
       const singleRecipe = await axios.get(
-        `https://artisan-bakery-data.herokuapp.com/api/recipes/show/${slug}`
+        `https://artisan-bakery-data.onrender.com/api/recipes/show/${slug}`
       );
       singleRecipe.status === 201 && dispatch(RecipiesDetialsLoadingStop());
       dispatch(AddingRecipeInfo(singleRecipe.data));

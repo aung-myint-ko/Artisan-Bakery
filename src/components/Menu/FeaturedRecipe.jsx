@@ -12,7 +12,7 @@ function FeaturedRecipe({ variety }) {
   useEffect(() => {
     const fetchCakes = async () => {
       const cakes = await axios.get(
-        `https://artisan-bakery-data.herokuapp.com/api/recipes/show/find?variety=${variety}`
+        `https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=${variety}`
       );
       dispatch(AddingCakes(cakes.data));
     };

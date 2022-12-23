@@ -10,7 +10,7 @@ function Header(props) {
 
   const handleLogout = async () => {
     await axios.post(
-      `https://artisan-bakery-data.herokuapp.com/api/auth/logout`
+      `https://artisan-bakery-data.onrender.com/api/auth/logout`
     );
     sessionStorage.removeItem("admin");
     window.location.reload();

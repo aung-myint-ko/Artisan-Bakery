@@ -72,7 +72,7 @@ function Create() {
     setLoading(true);
     if (imgPerc === 100) {
       const res = await axios.post(
-        "https://artisan-bakery-data.herokuapp.com/api/recipes/add",
+        "https://artisan-bakery-data.onrender.com/api/recipes/add",
         recipeDatas
       );
       if (res.status === 201) {
