@@ -15,6 +15,8 @@ import PageLoading from "../../custom-hooks/PageLoading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { AuthLoadingStart, AuthLoadingStop } from "../../store/loadingSlice";
 
+axios.defaults.withCredentials = true;
+
 const schema = yup
   .object()
   .shape({
