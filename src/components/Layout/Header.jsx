@@ -58,7 +58,7 @@ function Header(props) {
       >
         <div
           ref={MenuRef}
-          className={`z-30 text-xl absolute top-0 left-0 w-[70%] bg-white h-screen duration-300 transition-all ease-linear ${
+          className={`z-30 text-xl absolute top-0 w-[70%] bg-white h-screen duration-300 transition-all ease-linear ${
             open ? "left-0" : "-left-[100%]"
           } `}
         >
