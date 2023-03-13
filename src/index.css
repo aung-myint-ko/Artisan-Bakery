@@ -82,10 +82,6 @@ body::-webkit-scrollbar-button,
   box-shadow: 0 4px 6px 1px rgb(0 0 0 / 0.1), 0 2px 4px 1px rgb(0 0 0 / 0.1);
   background-color: var(--bg_chocohover);
 }
-.bin:hover svg {
-  color: white;
-}
-
 .nav_active,
 .clicked_nav_active {
   position: relative;

@@ -5,23 +5,17 @@ import Shop from "../../components/Shop/Shop";
 import useDocumentTitle from "../../custom-hooks/ChangePageTitle";
 import PageLoading from "../../custom-hooks/PageLoading";
 import { UpdatingRoute } from "../../store/cartSlice";
-import {
-  PageTransitionStart,
-  PageTransitionStop,
-} from "../../store/loadingSlice";
 
-function ShopPage(props) {
+function ShopPage({ setProgress }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const { pageTransition } = useSelector((state) => state.loadingReducer);
 
   useEffect(() => {
-    dispatch(PageTransitionStart());
+    setProgress(50);
     dispatch(UpdatingRoute(pathname));
-    setTimeout(() => {
-      dispatch(PageTransitionStop());
-    }, 1000);
-  }, []);
+    setProgress(100);
+  }, [dispatch, pathname, setProgress]);
   useDocumentTitle("Shop");
 
   return (

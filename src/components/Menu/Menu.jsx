@@ -1,27 +1,28 @@
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { AddingCakes } from "../../store/recipeSlice";
 import LoadingMessage from "./LoadingMessage";
-import MenuNavigationSwiper from "./MenuNavigation";
+import MenuNavigation from "./MenuNavigation";
 import RecipeCard from "./RecipeCard";
 
-function Menu(props) {
+function Menu({ setProgress }) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const { menuLoading } = useSelector((state) => state.loadingReducer);
   useEffect(() => {
-    const fetchCakes = async () => {
-      const cakes = await axios.get(
-        `https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=${
-          pathname.split("/")[2]
-        }`
+    setProgress(30);
+    const fetchRecipe = async () => {
+      const recipes = await axiosInstance.get(
+        `/recipe/find?variety=${pathname.split("/")[2]}`
       );
-      dispatch(AddingCakes(cakes.data));
+      recipes.status === 200 && setProgress(100);
+
+      dispatch(AddingCakes(recipes.data));
     };
-    fetchCakes();
-  }, [pathname, dispatch]);
+    fetchRecipe();
+  }, [pathname, dispatch, setProgress]);
 
   return (
     <>
@@ -34,7 +35,7 @@ function Menu(props) {
       </p>
 
       <div className=" lg:flex px-0 lg:px-20 pt-0 pb-16 md:pb-20">
-        <MenuNavigationSwiper />
+        <MenuNavigation />
         {menuLoading ? (
           <div className=" flex flex-col gap-y-10 w-full">
             <LoadingMessage />

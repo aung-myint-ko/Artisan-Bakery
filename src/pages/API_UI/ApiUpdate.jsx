@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Update from "../../components/api/Update";
@@ -8,9 +8,7 @@ function ApiUpdate(props) {
   const [recipe, setRecipe] = useState();
   useEffect(() => {
     const getSingleRecipe = async () => {
-      const recipe = await axios.get(
-        `https://artisan-bakery-data.onrender.com/api/recipes/show/${slug}`
-      );
+      const recipe = await axiosInstance.get(`/recipe/${slug}`);
       setRecipe(recipe.data);
     };
     getSingleRecipe();
@@ -23,7 +21,7 @@ function ApiUpdate(props) {
           name={recipe.name}
           variety={recipe.variety}
           desc={recipe.desc}
-          imageUrl={recipe.imageUrl}
+          image={recipe.imageUrl}
           price={recipe.price}
           slug={slug}
         />

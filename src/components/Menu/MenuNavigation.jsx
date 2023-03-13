@@ -1,4 +1,5 @@
 import React from "react";
+import axiosInstance from "../../axiosInstance";
 import {
   AddingAllVarietyRecipes,
   AddingBread,
@@ -8,33 +9,19 @@ import {
   AddingDonuts,
   AddingDrink,
 } from "../../store/recipeSlice";
-
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { MenuLoadingStart, MenuLoadingStop } from "../../store/loadingSlice";
 
 function MenuNavigation(props) {
   const dispatch = useDispatch();
   const handleAll = async () => {
-    const cake = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=cake"
-    );
-    const burger = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=burger"
-    );
-    const bread = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=bread"
-    );
-    const donut = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=donut"
-    );
-    const cookie = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=cookie"
-    );
-    const drink = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=drink"
-    );
+    const cake = await axiosInstance.get("/recipe/find?variety=cake");
+    const burger = await axiosInstance.get("/recipe/find?variety=burger");
+    const bread = await axiosInstance.get("/recipe/find?variety=bread");
+    const donut = await axiosInstance.get("/recipe/find?variety=donut");
+    const cookie = await axiosInstance.get("/recipe/find?variety=cookie");
+    const drink = await axiosInstance.get("/recipe/find?variety=drink");
     dispatch(
       AddingAllVarietyRecipes([
         cake.data,
@@ -48,49 +35,37 @@ function MenuNavigation(props) {
   };
   const handleCake = async () => {
     dispatch(MenuLoadingStart());
-    const cakes = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=cake"
-    );
+    const cakes = await axiosInstance.get("/recipe/find?variety=cake");
     dispatch(AddingCakes(cakes.data));
     cakes.status === 200 && dispatch(MenuLoadingStop());
   };
   const handleBurger = async () => {
     dispatch(MenuLoadingStart());
-    const burger = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=burger"
-    );
+    const burger = await axiosInstance.get("/recipe/find?variety=burger");
     dispatch(AddingBurger(burger.data));
     burger.status === 200 && dispatch(MenuLoadingStop());
   };
   const handleBread = async () => {
     dispatch(MenuLoadingStart());
-    const bread = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=bread"
-    );
+    const bread = await axiosInstance.get("/recipe/find?variety=bread");
     dispatch(AddingBread(bread.data));
     bread.status === 200 && dispatch(MenuLoadingStop());
   };
   const handleDonut = async () => {
     dispatch(MenuLoadingStart());
-    const donut = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=donut"
-    );
+    const donut = await axiosInstance.get("/recipe/find?variety=donut");
     dispatch(AddingDonuts(donut.data));
     donut.status === 200 && dispatch(MenuLoadingStop());
   };
   const handleCookie = async () => {
     dispatch(MenuLoadingStart());
-    const cookie = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=cookie"
-    );
+    const cookie = await axiosInstance.get("/recipe/find?variety=cookie");
     dispatch(AddingCookie(cookie.data));
     cookie.status === 200 && dispatch(MenuLoadingStop());
   };
   const handleDrink = async () => {
     dispatch(MenuLoadingStart());
-    const drink = await axios.get(
-      "https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=drink"
-    );
+    const drink = await axiosInstance.get("/recipe/find?variety=drink");
     dispatch(AddingDrink(drink.data));
     drink.status === 200 && dispatch(MenuLoadingStop());
   };

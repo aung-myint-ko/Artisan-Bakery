@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect } from "react";
+import axiosInstance from "../../axiosInstance";
 import Marquee from "react-fast-marquee";
 import { useDispatch, useSelector } from "react-redux";
 import { AddingCakes } from "../../store/recipeSlice";
@@ -11,9 +11,7 @@ function FeaturedRecipe({ variety }) {
 
   useEffect(() => {
     const fetchCakes = async () => {
-      const cakes = await axios.get(
-        `https://artisan-bakery-data.onrender.com/api/recipes/show/find?variety=${variety}`
-      );
+      const cakes = await axiosInstance.get(`/recipe/find?variety=${variety}`);
       dispatch(AddingCakes(cakes.data));
     };
     fetchCakes();

@@ -8,7 +8,7 @@ import { FormField } from "./FormField";
 import OrderSuccess from "./OrderSuccess";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 
 const schema = yup
   .object()
@@ -55,16 +55,13 @@ function Registration(props) {
 
   const OnSubmit = async (data) => {
     setCustomer(data);
-    await axios.put(
-      "https://artisan-bakery-data.onrender.com/api/auth/customer/history",
-      {
-        date: currentDate,
-        hour: formatAMPM(new Date()),
-        quantity: totalQuantity,
-        amount: finalTotalPrice + 1200,
-        foods: orderLists,
-      }
-    );
+    await axiosInstance.put("/user/history", {
+      date: currentDate,
+      hour: formatAMPM(new Date()),
+      quantity: totalQuantity,
+      amount: finalTotalPrice + 1200,
+      foods: orderLists,
+    });
   };
 
   return (

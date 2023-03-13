@@ -10,7 +10,7 @@ const initialState = {
     variety: undefined,
     desc: undefined,
     price: undefined,
-    imageUrl: undefined,
+    image: undefined,
   },
 };
 
@@ -24,6 +24,7 @@ const apiSlice = createSlice({
     LoginSuccess(state, action) {
       state.loading = false;
       state.currentUser = action.payload;
+      state.error = null;
     },
     LoginError(state, action) {
       state.loading = false;

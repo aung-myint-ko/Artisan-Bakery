@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +7,11 @@ import { LoginError, LoginStart, LoginSuccess } from "../../store/apiSlice";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import ClipLoader from "react-spinners/ClipLoader";
 import * as yup from "yup";
 
 axios.defaults.withCredentials = true;
-
+//Forms validation schema for admin log in
 const schema = yup
   .object()
   .shape({
@@ -19,7 +21,9 @@ const schema = yup
   .required();
 
 function LogIn(props) {
-  const { currentUser, error } = useSelector((state) => state.apiReducer);
+  const { currentUser, loading, error } = useSelector(
+    (state) => state.apiReducer
+  );
   const naviagate = useNavigate();
   const dispatch = useDispatch();
   const [passwordType, setPasswordType] = useState("password");
@@ -30,19 +34,18 @@ function LogIn(props) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const OnSubmit = async (formData) => {
+  const onSubmit = async (formData) => {
     try {
       dispatch(LoginStart());
-      const postUser = await axios.post(
-        `https://artisan-bakery-data.onrender.com/api/auth/admin/signin`,
-        formData
-      );
+      const postUser = await axiosInstance.post(`/admin/signin`, formData);
       sessionStorage.setItem("admin", JSON.stringify(postUser.data));
-      postUser.status === 200 && toast.success("Successfully Login");
-      dispatch(LoginSuccess(postUser.data));
-      setTimeout(() => {
-        naviagate(`/api/manage`);
-      }, 1000);
+      if (postUser.status === 200) {
+        toast.success("Successfully Login", { duration: 700 });
+        dispatch(LoginSuccess(postUser.data));
+        setTimeout(() => {
+          naviagate(`/api/manage`);
+        }, 1000);
+      }
     } catch (err) {
       dispatch(LoginError(err.response.data.message));
     }
@@ -63,12 +66,12 @@ function LogIn(props) {
       <Toaster />
       <div className=" w-full h-screen bg-gray-100  flex justify-center items-center ">
         <div className=" w-11/12 max-w-sm py-10 px-8 border border-gray-200 shadow-md rounded-md bg-white ">
-          <h1 className=" choco font_title font-extrabold text-center text-2xl tracking-widest mb-2 ">
+          <h1 className=" choco font_title font-extrabold text-center text-2xl tracking-widest mb-3 ">
             ARTISAN
           </h1>
 
           {error ? (
-            <p className=" mb-8 text-sm tracking-wide text-red-500 font-bold text-center ">
+            <p className=" py-2 px-1 mb-8 text-xs tracking-wide bg-red-500 text-white text-center ">
               {error}
             </p>
           ) : (
@@ -76,7 +79,7 @@ function LogIn(props) {
               Note: Only admins are allow to log in.
             </p>
           )}
-          <form onSubmit={handleSubmit(OnSubmit)} action="">
+          <form onSubmit={handleSubmit(onSubmit)} action="">
             <div className="mb-7">
               <div className=" flex flex-col mb-5">
                 <label className=" text-lg mb-1" htmlFor="">
@@ -121,10 +124,12 @@ function LogIn(props) {
             <button
               type={"submit"}
               className={
-                currentUser ? "button bg-green-700 mx-auto" : "button mx-auto"
+                currentUser
+                  ? "button w-[102px] h-[43px] bg-green-700 mx-auto"
+                  : "w-[102px] h-[43px] button mx-auto"
               }
             >
-              Log In
+              {loading ? <ClipLoader color="#ffffff" size={24} /> : "Log In"}
             </button>
           </form>
         </div>

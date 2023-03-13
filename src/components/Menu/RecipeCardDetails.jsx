@@ -1,6 +1,6 @@
-import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
+import axiosInstance from "../../axiosInstance";
 import { Toaster } from "react-hot-toast";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,17 +11,17 @@ import {
   IncreaseQuantity,
   ResetQuantity,
 } from "../../store/cartSlice";
-import { AddingRecipeInfo, CleanigRecipeInfo } from "../../store/recipeSlice";
+import { AddingRecipeInfo } from "../../store/recipeSlice";
 import CheckingUser from "./CheckingUser";
 import FeaturedRecipe from "./FeaturedRecipe";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import {
   RecipiesDetialsLoadingStart,
   RecipiesDetialsLoadingStop,
 } from "../../store/loadingSlice";
 import PageLoading from "../../custom-hooks/PageLoading";
 
-function RecipeCardDetails(props) {
+function RecipeCardDetails({ setProgress }) {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const { quantity, isError } = useSelector((state) => state.cartReducer);
   const { recipeInfo } = useSelector((state) => state.recipesReducer);
@@ -30,23 +30,27 @@ function RecipeCardDetails(props) {
   );
   const { name, desc, imageUrl, price, variety } = recipeInfo;
   const { slug } = useParams();
-  const dispatch = useDispatch();
+
+  //Reset the quantity, fetch specific recipe and add that data to redux
   useEffect(() => {
+    setProgress(30);
     dispatch(RecipiesDetialsLoadingStart());
     dispatch(ResetQuantity());
     const fetchSpecificRecipe = async () => {
-      const singleRecipe = await axios.get(
-        `https://artisan-bakery-data.onrender.com/api/recipes/show/${slug}`
-      );
-      singleRecipe.status === 201 && dispatch(RecipiesDetialsLoadingStop());
-      dispatch(AddingRecipeInfo(singleRecipe.data));
+      const singleRecipe = await axiosInstance.get(`/recipe/${slug}`);
+      if (singleRecipe.status === 201) {
+        setProgress(100);
+        dispatch(AddingRecipeInfo(singleRecipe.data));
+        dispatch(RecipiesDetialsLoadingStop());
+      }
     };
     fetchSpecificRecipe();
-  }, [slug, dispatch]);
+  }, [slug, dispatch, setProgress]);
 
   const handleAddToCart = () => {
     dispatch(AddToCart({ recipeInfo, quantity }));
   };
+
   return (
     <>
       {recipiesDetialsLoading ? (
@@ -60,10 +64,10 @@ function RecipeCardDetails(props) {
           </Link>
 
           <div className="px-4 md:px-14 lg:px-20 py-8 grid grid-cols-1 lg:grid-cols-2 items-center gap-10  bg-[#6b320a] ">
-            <LazyLoadImage
-              className=" w-72 h-72 md:w-96 md:h-96 lg:w-72 lg:h-72 border-slate-300 bg-slate-50 mx-auto rounded  duration-300"
+            <img
+              className=" w-72 h-72 md:w-96 md:h-96 lg:w-72 lg:h-72 border-slate-300 bg-slate-50 mx-auto rounded duration-300"
               src={imageUrl}
-              alt=""
+              alt={imageUrl && slug}
             />
             <h1 className=" text-3xl md:text-4xl text-center tracking-wider font-semibold lg:max-w-[400px] text-white ">
               {name}

@@ -177,9 +177,9 @@ const EmptyCart = () => {
     <>
       <div className=" px-4 md:px-14 h-[calc(100vh_-_73px)] lg:h-[564px] flex flex-col justify-center items-center">
         <LazyLoadImage
-          className=" w-[200px]"
+          className=" w-[200px] h-[200px]"
           src="/images/empty-shopping-bag.svg"
-          alt=""
+          alt="empty"
         />
         <h1 className="text-3xl md:text-4xl text-center font-semibold mb-4 tracking-wider">
           Your cart is empty

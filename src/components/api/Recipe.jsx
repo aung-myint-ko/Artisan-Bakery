@@ -10,7 +10,7 @@ function Recipe({ imageUrl, name, slug }) {
         <LazyLoadImage
           className=" w-14 h-14 rounded-md  border border-gray-300"
           src={imageUrl}
-          alt=""
+          alt={slug}
         />
         <h1 className=" text-lg font-medium ">{name}</h1>
       </div>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 import React, { useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { Link, Outlet } from "react-router-dom";
@@ -6,12 +6,10 @@ import { Link, Outlet } from "react-router-dom";
 function Header(props) {
   const [click, setClick] = useState(false);
   const jsonUser = sessionStorage.getItem("admin");
-  const currentUser = JSON.parse(jsonUser);
+  const currentUser = jsonUser ? JSON.parse(jsonUser) : { imageUrl: null };
 
   const handleLogout = async () => {
-    await axios.post(
-      `https://artisan-bakery-data.onrender.com/api/auth/logout`
-    );
+    await axiosInstance.post(`/user/logout`);
     sessionStorage.removeItem("admin");
     window.location.reload();
   };
@@ -26,14 +24,17 @@ function Header(props) {
 
         <div
           onClick={() => setClick((prev) => !prev)}
-          className=" cursor-pointer hover:bg-blue-500 w-11 h-11 border-white border-2 bg-blue-400 rounded-full flex justify-center items-center "
+          className=" cursor-pointer w-11 h-11 overflow-hidden border-white border-2 rounded-full flex justify-center items-center "
         >
-          <h1 className=" font-medium text-white">
-            {currentUser
-              ? currentUser.name.split(" ")[0].charAt(0) +
-                currentUser.name.split(" ")[1].charAt(0)
-              : "?"}
-          </h1>
+          <img
+            className="w-full h-full"
+            src={
+              currentUser.imageUrl && currentUser
+                ? currentUser.imageUrl
+                : "/images/user.png"
+            }
+            alt={currentUser.imageId}
+          />
         </div>
         <div
           onClick={handleLogout}

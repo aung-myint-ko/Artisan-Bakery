@@ -25,12 +25,21 @@ import ApiCreate from "./pages/API_UI/ApiCreate";
 import ApiManage from "./pages/API_UI/ApiManage";
 import ApiUpdate from "./pages/API_UI/ApiUpdate";
 import Error from "./pages/FrontEnd_UI/Error";
+import LoadingBar from "react-top-loading-bar";
+import { useState } from "react";
 
 function App() {
   let { pastRoute } = useSelector((state) => state.cartReducer);
+  const [progress, setProgress] = useState(0);
 
   return (
     <Router>
+      <LoadingBar
+        color="#974103"
+        waitingTime={0}
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <ScrollToTop>
         <Routes>
           {/* Frontend Routes */}
@@ -38,27 +47,51 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
 
           <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/menu/all" element={<AllMenuPage />} />
-            <Route path="/menu/:type" element={<MenuPage />} />
+            <Route path="/" element={<Home setProgress={setProgress} />} />
+            <Route
+              path="/menu/all"
+              element={<AllMenuPage setProgress={setProgress} />}
+            />
+            <Route
+              path="/menu/:type"
+              element={<MenuPage setProgress={setProgress} />}
+            />
             <Route
               path="/menu/:type/:slug"
-              element={<RecipeCardDetailsPage />}
+              element={<RecipeCardDetailsPage setProgress={setProgress} />}
             />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/reviews" element={<Home />} />
-            <Route path="/cart" element={<CartVocherPage />} />
+            <Route
+              path="/shop"
+              element={<ShopPage setProgress={setProgress} />}
+            />
+            <Route
+              path="/about"
+              element={<AboutUs setProgress={setProgress} />}
+            />
+
+            <Route
+              path="/cart"
+              element={<CartVocherPage setProgress={setProgress} />}
+            />
             <Route
               element={
                 <ProtectionRouteForOrderRegistration redirectPath={pastRoute} />
               }
             >
-              <Route path="/cart/order" element={<OrderRegistrationPage />} />
+              <Route
+                path="/cart/order"
+                element={<OrderRegistrationPage setProgress={setProgress} />}
+              />
             </Route>
             <Route element={<ProtectionRouteForUser />}>
-              <Route path="/user/profile" element={<UserProfilePage />} />
-              <Route path="/user/history" element={<UserHistoryPage />} />
+              <Route
+                path="/user/profile"
+                element={<UserProfilePage setProgress={setProgress} />}
+              />
+              <Route
+                path="/user/history"
+                element={<UserHistoryPage setProgress={setProgress} />}
+              />
             </Route>
           </Route>
           {/* Backend API routes */}

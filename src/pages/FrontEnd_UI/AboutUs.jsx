@@ -1,31 +1,21 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import useDocumentTitle from "../../custom-hooks/ChangePageTitle";
 import Story from "../../components/About/Story";
 import { UpdatingRoute } from "../../store/cartSlice";
-import {
-  PageTransitionStart,
-  PageTransitionStop,
-} from "../../store/loadingSlice";
-import PageLoading from "../../custom-hooks/PageLoading";
 
-function AboutUs(props) {
+function AboutUs({ setProgress }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const { pageTransition } = useSelector((state) => state.loadingReducer);
   useEffect(() => {
-    dispatch(PageTransitionStart());
+    setProgress(50);
     dispatch(UpdatingRoute(pathname));
-    setTimeout(() => {
-      dispatch(PageTransitionStop());
-    }, 1000);
-  }, []);
+    setProgress(100);
+  }, [dispatch, pathname, setProgress]);
   useDocumentTitle("About Us");
   return (
     <>
-      {pageTransition ? <PageLoading /> : null}
-
       <Story />
     </>
   );

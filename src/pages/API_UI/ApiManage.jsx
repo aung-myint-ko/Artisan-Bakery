@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 import TitleBar from "../../components/api/TitleBar";
 import { useDispatch, useSelector } from "react-redux";
 import { AddRceipesToArray } from "../../store/apiSlice";
@@ -11,9 +11,7 @@ function ApiManage(props) {
 
   useEffect(() => {
     const fetchingRecipes = async () => {
-      const recipes = await axios.get(
-        `https://artisan-bakery-data.onrender.com/api/recipes/show`
-      );
+      const recipes = await axiosInstance.get(`/recipe`);
       dispatch(AddRceipesToArray(recipes.data));
     };
     fetchingRecipes();
