@@ -34,6 +34,7 @@ function App() {
 
   return (
     <Router>
+      {/* LoadingBar Component */}
       <LoadingBar
         color="#974103"
         waitingTime={0}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
+import { BiImage } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axiosInstance from "../../axiosInstance";
@@ -72,7 +73,7 @@ function Create() {
   };
 
   return (
-    <>
+    <div>
       <div className="p-3 sm:px-10 md:px-16 bg-white w-full flex justify-between items-center border-b border-gray-300 mb-8">
         <Link to={"/api/manage"}>
           <BsArrowLeftShort className=" cursor-pointer" size={30} />
@@ -82,7 +83,7 @@ function Create() {
         </h1>
       </div>
       <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <div className="px-3 sm:px-10 md:px-16 flex flex-col gap-y-8 md:mb-20">
+        <div className="px-3 sm:px-10 md:px-16 flex flex-col gap-y-8 mb-20">
           <div className=" flex flex-col ">
             <label className=" text-lg mb-1" htmlFor="">
               Name
@@ -152,21 +153,36 @@ function Create() {
               Image
             </label>
 
-            <div className="flex gap-x-6 items-center">
-              <input onChange={handleImgChange} type="file" />
+            <div
+              className={`relative gap-x-6 flex justify-center items-center w-full outline-none border px-3 py-4 md:py-5 border-gray-400 rounded ${
+                image && "h-[216px] md:h-[290px] bg-gray-100"
+              }`}
+            >
+              {!image && (
+                <div className=" opacity-60 tracking-wider absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center ">
+                  <BiImage size={28} className=" m-2 opacity-80" />
+                  <p className=" text-xs md:text-base w-[180px] md:w-[240px]">
+                    Drag or paste image here
+                  </p>
+                </div>
+              )}
+
+              <input
+                onChange={handleImgChange}
+                className=" w-full h-full cursor-pointer opacity-0"
+                type="file"
+              />
               {image && (
-                <>
-                  <LazyLoadImage
-                    src={image}
-                    className=" max-w-[250px] border border-gray-300"
-                    alt="recipe-image"
-                  />
-                </>
+                <LazyLoadImage
+                  src={image}
+                  className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[200px] h-[200px] md:max-w-[250px] md:h-[250px]  border border-gray-300"
+                  alt="recipe-image"
+                />
               )}
             </div>
           </div>
         </div>
-        <div className="p-3 sm:px-10 md:px-16 fixed bottom-0 left-0 w-full bg-white flex justify-end items-center gap-5 border-t border-gray-400 ">
+        <div className=" fixed bottom-0 left-0 w-full bg-white p-3 sm:px-10 md:px-16 flex justify-end items-center gap-5 border-t border-gray-400 ">
           <button
             disabled={objectsContainValue}
             type={"submit"}
@@ -181,7 +197,7 @@ function Create() {
         </div>
       </form>
       <Toaster />
-    </>
+    </div>
   );
 }
 
