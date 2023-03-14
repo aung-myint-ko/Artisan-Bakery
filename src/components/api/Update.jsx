@@ -88,7 +88,7 @@ function Update({ name, variety, desc, image, price, slug }) {
         </h1>
       </div>
       <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <div className="px-3 sm:px-10 md:px-16 flex flex-col gap-y-8 md:mb-20">
+        <div className="px-3 sm:px-10 md:px-16 flex flex-col gap-y-8 mb-20">
           <div className=" flex flex-col ">
             <label className=" text-lg mb-1" htmlFor="">
               Name
